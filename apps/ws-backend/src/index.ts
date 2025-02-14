@@ -1,3 +1,5 @@
+// import {JWT_SECRET} from "@repo/common-backend/config"
+// console.log(JWT_SECRET);
 
 import { WebSocketServer } from 'ws';
 

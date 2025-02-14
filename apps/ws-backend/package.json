@@ -9,13 +9,14 @@
     "dev": "tsc -b && node ./dist/index.js"
   },
   "dependencies": {
-    "@repo/typescript-config": "workspace:*",
     "ws": "^8.18.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/ws": "^8.5.14"
+    "@types/ws": "^8.5.14",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/common-backend":"workspace:*"
   }
 }

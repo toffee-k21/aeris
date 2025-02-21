@@ -1,29 +1,52 @@
 import {prismaClient} from "@repo/db";
 import express, { Request,Response } from "express";
+import JWT from "jsonwebtoken";
+import { JWT_SECRET } from "@repo/common-backend/config"
 
 export const router:any = express.Router();
-interface SignupRequestBody {
-    username: String,
-    email: String,
-    password: String,
-    photo?: String
-}
+// interface SignupRequestBody {
+//     username: string,
+//     email: string,
+//     password: string,
+//     photo?: string
+// }
 
+router.post("/signin",async (req:Request,res:Response)=>{
+    const {email,password} = req?.body;
 
-router.post("/signin",(req:Request,res:Response)=>{
-    
+    const resp = await prismaClient.user.findFirst({
+        where:{
+           email,
+           password
+        }
+      
+    })
+
+    if(!resp){
+        res.json({message: "User does not exists"});
+    }
+
+    let token = JWT.sign(email,JWT_SECRET);
+
+    res.json({token});
 })
 
 router.post("/signup",async (req:Request,res:Response)=>{
-    const {username,email,password,photo} = req?.body as SignupRequestBody
+    const {username,email,password,photo} = req?.body;
 
-    const resp = await prismaClient.User.create({data:{
+    const resp = await prismaClient.user.create({data:{
         username,
         email,
         password,
         photo
-    }})
+    }}); 
 
-    res.json(resp);
+    if(!resp){
+        res.json({message: "User not added"});
+    }
+
+    let token = JWT.sign(email,JWT_SECRET);
+
+    res.json({token});
 })
 

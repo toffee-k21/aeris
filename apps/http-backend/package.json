@@ -10,15 +10,17 @@
   },
   "dependencies": {
     "@prisma/client": "^6.3.1",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@repo/common-backend": "workspace:*",
+    "@repo/db": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.0",
-    "@repo/db": "workspace:*"
+    "@types/jsonwebtoken": "^9.0.8"
   }
 }

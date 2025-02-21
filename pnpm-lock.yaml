@@ -30,6 +30,9 @@ importers:
       '@repo/common-backend':
         specifier: workspace:*
         version: link:../../packages/common-backend
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -101,9 +104,16 @@ importers:
 
   packages/db:
     dependencies:
+      '@prisma/client':
+        specifier: 6.3.1
+        version: 6.3.1(prisma@6.3.1(typescript@5.7.3))(typescript@5.7.3)
       prisma:
         specifier: ^6.3.1
         version: 6.3.1(typescript@5.7.3)
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
   packages/eslint-config:
     devDependencies:

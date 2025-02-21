@@ -14,10 +14,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022",
-    "compilerOptions": {
-      "rootDir": "./src",
-      "outDir": "./dist"
-    }
+    "target": "ES2022"
   }
 }

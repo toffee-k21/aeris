@@ -56,7 +56,21 @@ wss.on('connection', function connection(ws, request) {
     else {
       parsedData = JSON.parse(data);
     }
-  });
 
-  ws.send('something');
+    if(parsedData.type == "join_room"){
+      const user = users.find(x => x.ws === ws);
+      user?.rooms.push(parsedData.roomId);
+    }
+
+  });
 });
+
+/*
+msg architecture 
+ Chat : {
+   type : ,
+   message : ,
+   roomId: ,
+   userId:
+ }
+*/

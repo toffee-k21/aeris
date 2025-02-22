@@ -4,12 +4,6 @@ import JWT from "jsonwebtoken";
 import { JWT_SECRET } from "@repo/common-backend/config"
 
 export const router:any = express.Router();
-// interface SignupRequestBody {
-//     username: string,
-//     email: string,
-//     password: string,
-//     photo?: string
-// }
 
 router.post("/signin",async (req:Request,res:Response)=>{
     const {email,password} = req?.body;
@@ -23,10 +17,10 @@ router.post("/signin",async (req:Request,res:Response)=>{
     })
 
     if(!resp){
-        res.json({message: "User does not exists"});
+        return res.json({message: "User does not exists"});
     }
 
-    let token = JWT.sign(email,JWT_SECRET);
+    let token = JWT.sign({userId:resp.id,email:email},JWT_SECRET);
 
     res.json({token});
 })
@@ -45,7 +39,7 @@ router.post("/signup",async (req:Request,res:Response)=>{
         res.json({message: "User not added"});
     }
 
-    let token = JWT.sign(email,JWT_SECRET);
+    let token = JWT.sign({userId:resp.id,email:email},JWT_SECRET);
 
     res.json({token});
 })

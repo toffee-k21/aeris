@@ -20,6 +20,6 @@ router.post("/",async (req:RequestExtend,res:Response)=>{
             roomId : resp.id
         })
     } catch (e){
-        res.json({message:"room id not unique"});
+        res.json({message:"room id already exists"});
     }
 })

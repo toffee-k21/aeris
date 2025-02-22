@@ -1,12 +1,19 @@
 import {JWT_SECRET} from "@repo/common-backend/config"
 import JWT, {JwtPayload} from "jsonwebtoken"
-// console.log(JWT_SECRET);
-
 import { WebSocketServer } from 'ws';
+import WebSocket from 'ws';
 
 interface CustomJwtPayload extends JwtPayload {
 userId : string
 }
+
+interface User {
+  userId: string,
+  rooms : string[]
+  ws: WebSocket
+}
+
+const users:User[] = [];
 
 const wss = new WebSocketServer({ port: 8080 });
 
@@ -26,12 +33,29 @@ wss.on('connection', function connection(ws, request) {
     return;
   }
 
+
   const queryParam = new URLSearchParams(url.split("?")[1]);
   const token = queryParam.get('token') || "";
   const userId = checkUserAuth(token);
+  if(!userId) {
+    ws.close();
+    return null;
+  }
+
+  users.push({
+        userId,
+        rooms: [],
+        ws
+      })
 
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
+    let parsedData;
+    if(typeof data != "string"){
+       parsedData = JSON.parse(data.toString());    
+    }
+    else {
+      parsedData = JSON.parse(data);
+    }
   });
 
   ws.send('something');

@@ -2,6 +2,7 @@ import {JWT_SECRET} from "@repo/common-backend/config"
 import JWT, {JwtPayload} from "jsonwebtoken"
 import { WebSocketServer } from 'ws';
 import WebSocket from 'ws';
+import { prismaClient } from "@repo/db"
 
 interface CustomJwtPayload extends JwtPayload {
 userId : string
@@ -48,7 +49,7 @@ wss.on('connection', function connection(ws, request) {
         ws
       })
 
-  ws.on('message', function message(data) {
+  ws.on('message', async function message(data) {
     let parsedData;
     if(typeof data != "string"){
        parsedData = JSON.parse(data.toString());    
@@ -66,6 +67,14 @@ wss.on('connection', function connection(ws, request) {
       const user = users.find(x => x.ws === ws);
       user?.rooms.filter(x => x === parsedData.roomId);
     }
+
+    const resp  = await prismaClient.chat.create({
+      data : {
+        type: parsedData.type,
+        userId,
+        message : parsedData.message,
+        roomId : parsedData.roomId,
+      }})
 
     if(parsedData.type == "chat"){
        users.forEach((user) => {

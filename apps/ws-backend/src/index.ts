@@ -10,7 +10,7 @@ userId : string
 
 interface User {
   userId: string,
-  rooms : string[]
+  rooms : number[]
   ws: WebSocket
 }
 
@@ -50,6 +50,7 @@ wss.on('connection', function connection(ws, request) {
       })
 
   ws.on('message', async function message(data) {
+    try{
     let parsedData;
     if(typeof data != "string"){
        parsedData = JSON.parse(data.toString());    
@@ -68,15 +69,19 @@ wss.on('connection', function connection(ws, request) {
       user?.rooms.filter(x => x === parsedData.roomId);
     }
 
-    const resp  = await prismaClient.chat.create({
-      data : {
-        type: parsedData.type,
-        userId,
-        message : parsedData.message,
-        roomId : parsedData.roomId,
-      }})
-
     if(parsedData.type == "chat"){
+      // todo : use a queue system to store these chats in db 
+      const resp  = await prismaClient.chat.create({
+        data : {
+          type: parsedData.type,
+          userId,
+          message : parsedData.message,
+          roomId : parsedData.roomId,
+        }
+      })
+
+
+      //concept : ws k though khud koo hi send kra rha !....as sbka ws object store h in my backend state
        users.forEach((user) => {
          if (user.rooms.includes(parsedData.roomId)){
           ws.send(JSON.stringify({
@@ -88,6 +93,10 @@ wss.on('connection', function connection(ws, request) {
          }
        })
     }
+
+  } catch (e) {
+    console.log(e);
+  }
 
   });
 });

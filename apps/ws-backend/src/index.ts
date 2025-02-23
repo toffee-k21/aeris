@@ -62,6 +62,24 @@ wss.on('connection', function connection(ws, request) {
       user?.rooms.push(parsedData.roomId);
     }
 
+    if(parsedData.type == "leave_room"){
+      const user = users.find(x => x.ws === ws);
+      user?.rooms.filter(x => x === parsedData.roomId);
+    }
+
+    if(parsedData.type == "chat"){
+       users.forEach((user) => {
+         if (user.rooms.includes(parsedData.roomId)){
+          ws.send(JSON.stringify({
+            userId,
+            type: "chat",
+            message: parsedData.message,
+            roomId: parsedData.roomId
+          }))
+         }
+       })
+    }
+
   });
 });
 

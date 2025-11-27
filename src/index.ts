@@ -13,8 +13,8 @@ app.use("/admin", adminRouter);
 async function start() {
   await connectDB();
 
-  createWSServer(5000); // WS server
-  app.listen(4000, () => console.log("HTTP API on 4000"));
+  createWSServer(4000); // WS server
+  app.listen(5001, () => console.log("HTTP API on 5001"));
 }
 
 start();

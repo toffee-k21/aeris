@@ -7,8 +7,8 @@ export function Navigation() {
   const navLinks = [
     { name: 'Introduction', path: '/' },
     { name: 'Architecture', path: '/architecture' },
-    { name: 'Build Guide', path: '/build-guide' },
-    { name: 'API Keys', path: '/api-keys' },
+    { name: 'Build Guide', path: '/guide' },
+    { name: 'API Keys', path: '/generateKey' },
   ];
 
 
@@ -19,7 +19,7 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <span className="tracking-tight" style={{ fontWeight: 300, fontSize: '20px' }}>
-              Aeris
+              AERIS
             </span>
           </Link>
 

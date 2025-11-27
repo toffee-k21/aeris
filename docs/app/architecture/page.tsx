@@ -28,7 +28,7 @@ export default function Architecture() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="max-w-[800px]">
-          <h1 className="mb-6">Aeris Architecture</h1>
+          <h1 className="mb-6">AERIS Architecture</h1>
           <p style={{ fontSize: '18px', lineHeight: '1.6', color: '#737373' }}>
             A stateless, horizontally scalable architecture built on WebSockets and Redis Pub/Sub.
           </p>
@@ -189,7 +189,7 @@ export default function Architecture() {
               Upon reconnection, clients must resubscribe to their topics.
             </p>
             <p>
-              Aeris does not persist subscription state. This design keeps the system 
+              AERIS does not persist subscription state. This design keeps the system 
               stateless and horizontally scalable.
             </p>
             <p>
@@ -279,7 +279,7 @@ export default function Architecture() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <p className="mb-4">
-            Aeris implements a ping/pong heartbeat mechanism to detect stale connections.
+            AERIS implements a ping/pong heartbeat mechanism to detect stale connections.
           </p>
           <p className="mb-4">
             Every 30 seconds, the server sends a ping frame. Clients must respond with a pong 

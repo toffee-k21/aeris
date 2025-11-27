@@ -47,7 +47,7 @@ export default function ApiKeys() {
         <div className="max-w-[800px]">
           <h1 className="mb-6">Get Your API Key</h1>
           <p style={{ fontSize: '18px', lineHeight: '1.6', color: '#737373' }}>
-            Aeris uses API keys to authenticate publish requests and associate them with your application.
+            AERIS uses API keys to authenticate publish requests and associate them with your application.
           </p>
         </div>
       </motion.section>
@@ -71,7 +71,7 @@ export default function ApiKeys() {
             <div>
               <p className="mb-4">
                 An API key is a unique identifier that authenticates your application when 
-                publishing events to Aeris.
+                publishing events to AERIS.
               </p>
               <p>
                 Each key is tied to a specific application and provides access control 
@@ -182,7 +182,7 @@ export default function ApiKeys() {
           {/* Left - Description */}
           <div className="space-y-6">
             <p>
-              API keys are used for authenticating HTTP publish requests to the Aeris service.
+              API keys are used for authenticating HTTP publish requests to the AERIS service.
             </p>
             <p>
               All requests to the publish endpoint must include the <code className="bg-[#fafafa] px-2 py-1 rounded border border-[#e4e4e7]">x-api-key</code> header 

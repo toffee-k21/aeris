@@ -27,9 +27,9 @@ export default function Home() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="max-w-[800px]">
-          <h1 className="mb-6">Aeris — Real-Time Notification Service</h1>
+          <h1 className="mb-6">AERIS — Real-Time Notification Service</h1>
           <p className="max-w-[70%]" style={{ fontSize: '18px', lineHeight: '1.6' }}>
-            Aeris is a minimal, scalable real-time backend for building chat applications, 
+            AERIS is a minimal, scalable real-time backend for building chat applications, 
             dashboards, live feeds, and event-driven systems. It provides a WebSocket API 
             for subscribing to real-time topics and an HTTP API for publishing events.
           </p>
@@ -41,19 +41,19 @@ export default function Home() {
         <div className="border-t border-[#e4e4e7]"></div>
       </div>
 
-      {/* How Aeris Works */}
+      {/* How AERIS Works */}
       <motion.section 
         className="px-8 lg:px-[120px] py-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
       >
-        <h2 className="mb-12">How Aeris Works</h2>
+        <h2 className="mb-12">How AERIS Works</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column - Description */}
           <div className="space-y-6">
             <p>
-              Aeris allows clients to subscribe to topics using WebSockets and receive 
+              AERIS allows clients to subscribe to topics using WebSockets and receive 
               real-time updates.
             </p>
             <p>

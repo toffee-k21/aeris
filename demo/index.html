@@ -7,7 +7,7 @@
 <pre id="log"></pre>
 <script>
 const protocol = location.protocol === "https:" ? "wss" : "ws";
-const ws = new WebSocket(`${protocol}://${location.hostname}:4000/ws`);
+const ws = new WebSocket(`${protocol}://${location.hostname}:4000/ws?apiKey=api_8e6f7cd574d83a70ca69f1292e0c7ba14e38788632aad883`);
 const log = document.getElementById('log');
 function append(s){ log.textContent += s + "\n"; }
 

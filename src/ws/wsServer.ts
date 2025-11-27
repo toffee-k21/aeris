@@ -24,6 +24,9 @@ import { ApiKey } from "../core/apiKeyManager";
       topicCount.set(topic, count);
     }
   }
+  // note : this will subscribe/unsubscribe, if users in this instance(node) is instrested or not by mainting a counter (this counter also ensures that there is no duplicate subscription is made)
+
+  // imp note : sub.on("message", callback) is triggered only if the instance is subscribed to that channel and runs when message arrives
 
 export function createWSServer(serverPort:any) {
   const wss = new WebSocketServer({ port: serverPort });

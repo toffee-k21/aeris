@@ -1,4 +1,3 @@
-// src/routes/publishRoute.ts
 import express, { Response } from "express";
 import { requireApiKey } from "../middleware/requireApiKey";
 import { publishMessage } from "../services/publishService";

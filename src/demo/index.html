@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<body>
+<h3>Demo client</h3>
+<input id="topic" placeholder="topic (e.g. orders:123)" />
+<button id="sub">Subscribe</button>
+<pre id="log"></pre>
+<script>
+const protocol = location.protocol === "https:" ? "wss" : "ws";
+const ws = new WebSocket(`${protocol}://${location.hostname}:4000/ws`);
+const log = document.getElementById('log');
+function append(s){ log.textContent += s + "\n"; }
+
+ws.onopen = () => append("connected");
+ws.onmessage = (e) => append("recv: " + e.data);
+
+document.getElementById('sub').onclick = () => {
+  const t = document.getElementById('topic').value;
+  ws.send(JSON.stringify({ type: "subscribe", topic: t }));
+  append("subscribe: " + t);
+};
+</script>
+</body>
+</html>

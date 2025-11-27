@@ -1,4 +1,3 @@
-// src/services/publisherService.ts
 import { pub } from "../config/redis";
 import { toInternalTopic } from "../core/topicManager";
 

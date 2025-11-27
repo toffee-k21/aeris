@@ -38,6 +38,16 @@ export function createWSServer(serverPort:any) {
         const internal = toInternalTopic(ws.appId, msg.topic);
         ws.subscriptions!.add(internal);
         ensureSubscribed(internal);
+      } 
+      else if (msg.type === "unsubscribe" && typeof msg.topic === "string") {
+        const t = msg.topic;
+        if (ws.subscriptions!.has(t)) {
+          ws.subscriptions!.delete(t);
+            maybeUnsubscribe(t);
+          ws.send(JSON.stringify({ type: "unsubscribed", topic: t }));
+        }
+      } else {
+        ws.send(JSON.stringify({ type: "error", reason: "unknown_type" }));
       }
     });
 

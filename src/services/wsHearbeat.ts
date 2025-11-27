@@ -1,9 +1,7 @@
-// src/ws/wsHeartbeat.ts
-
 export function setupHeartbeat(wss:any, clients:any) {
   setInterval(() => {
     for (const ws of clients) {
-      if (!ws.isAlive) return ws.terminate();
+      if (!ws.isAlive) return ws.terminate(); // .terminate() always triggers the .onclose event if missed
       ws.isAlive = false;
       ws.ping();
     }

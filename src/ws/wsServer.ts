@@ -4,8 +4,9 @@ import { safeJSONParse } from "../utils/safeJson";
 import { toInternalTopic } from "../core/topicManager";
 import { setupHeartbeat } from "../services/wsHearbeat";
 import { WSClient } from "../types";
+import { ApiKey } from "../core/apiKeyManager";
 
- const clients = new Set<WSClient>();
+  const clients = new Set<WSClient>();
   const topicCount = new Map<string, number>();
 
   // subscribe/unsubscribe helpers
@@ -27,8 +28,25 @@ import { WSClient } from "../types";
 export function createWSServer(serverPort:any) {
   const wss = new WebSocketServer({ port: serverPort });
 
-  wss.on("connection", (rawWs: WebSocket, req) => {
-    const ws = rawWs as WSClient
+  wss.on("connection", async (rawWs: WebSocket, req) => {
+    const ws = rawWs as WSClient;
+    const url = new URL(req.url!, "http://localhost");
+  const apiKey = url.searchParams.get("apiKey");
+
+  if (!apiKey) {
+    ws.close();
+    return;
+  }
+
+  // validate api key 
+  const record = await ApiKey.findOne({ apiKey });
+  if (!record) {
+    ws.close();
+    return;
+  }
+
+  ws.appId = record.appId;
+
     ws.subscriptions = new Set();
     clients.add(ws);
 
@@ -59,9 +77,9 @@ export function createWSServer(serverPort:any) {
     });
   });
 
-  sub.on("message", (channel:any, message:any) => {
+  sub.on("message", (topic:any, message:any) => {
     for (const ws of clients) {
-      if (ws.subscriptions!.has(channel)) {
+      if (ws.subscriptions!.has(topic)) {
         ws.send(message);
       }
     }

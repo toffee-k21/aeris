@@ -12,5 +12,6 @@ export interface ClientSubscriptions {
 export interface WSClient extends WebSocket {
   subscriptions?: Set<Topic>;
   isAlive:any;
+  appId:any;
 }
 
